@@ -3,48 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Teste de Conversão Google Ads - Multi Eventos</title>
+  <title>Teste Pixel Google Ads Dinâmico</title>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17002507320"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'AW-17002507320');
 
-    function enviarConversao(label) {
+    function carregarPixel(pixelId) {
+      gtag('js', new Date());
+      gtag('config', pixelId);
+    }
+
+    function enviarConversao() {
+      const pixelId = document.getElementById('pixelId').value.trim();
+      const label = document.getElementById('conversionLabel').value.trim();
+
+      if (!pixelId.startsWith('AW-')) {
+        alert('Digite um ID válido que começa com AW-');
+        return;
+      }
+      if (!label) {
+        alert('Digite o Label da conversão');
+        return;
+      }
+
+      carregarPixel(pixelId);
+
       gtag('event', 'conversion', {
-        'send_to': label,
+        'send_to': `${pixelId}/${label}`,
         'value': 0.0,
         'currency': 'BRL',
         'transaction_id': ''
       });
-      alert('Conversão enviada para: ' + label);
+
+      alert(`Evento disparado para: ${pixelId}/${label}`);
     }
   </script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
+      background: #f5f5f5;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
-      padding: 50px;
     }
     h1 {
-      color: #333;
       margin-bottom: 20px;
+      color: #333;
+    }
+    input[type=text] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
     }
     button {
-      margin: 10px;
       padding: 15px 30px;
       font-size: 16px;
+      background-color: #4285f4;
+      color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      background-color: #4285f4;
-      color: white;
       transition: background-color 0.3s ease;
-      min-width: 220px;
+      width: 100%;
     }
     button:hover {
       background-color: #3367d6;
@@ -53,11 +83,12 @@
 </head>
 <body>
 
-  <h1>Teste de Conversão Google Ads - Multi Eventos</h1>
+  <h1>Teste Pixel Google Ads</h1>
 
-  <button onclick="enviarConversao('AW-17002507320/pMxgCPWrwcwaELjYtqs_')">Lift Detox Black</button>
-  <button onclick="enviarConversao('AW-17002507320/8EBYCJbwkvIaELjYtqs_')">Teste (1)</button>
-  <button onclick="enviarConversao('AW-17002507320/7yOuCOLEhdIaELjYtqs_')">Rosa Amazonica</button>
+  <input type="text" id="pixelId" placeholder="ID do Pixel (ex: AW-123456789)" />
+  <input type="text" id="conversionLabel" placeholder="Label da Conversão (ex: abcDEfg123)" />
+
+  <button onclick="enviarConversao()">Disparar Conversão</button>
 
 </body>
 </html>
