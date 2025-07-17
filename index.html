@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Teste de Conversão - teste (1)</title>
+  <title>Teste de Conversão Google Ads - Multi Eventos</title>
 
-  <!-- Google Ads Global Site Tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17002507320"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,35 +12,39 @@
     gtag('js', new Date());
     gtag('config', 'AW-17002507320');
 
-    function enviarConversao() {
+    function enviarConversao(label) {
       gtag('event', 'conversion', {
-        'send_to': 'AW-17002507320/8EBYCJbwkvIaELjYtqs_',
+        'send_to': label,
         'value': 0.0,
         'currency': 'BRL',
         'transaction_id': ''
       });
-      alert('Conversão enviada para teste (1)!');
+      alert('Conversão enviada para: ' + label);
     }
   </script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f7f7f7;
       text-align: center;
       padding: 50px;
-      background: #f7f7f7;
     }
     h1 {
       color: #333;
+      margin-bottom: 20px;
     }
     button {
+      margin: 10px;
       padding: 15px 30px;
-      font-size: 18px;
-      background-color: #4285f4;
-      color: white;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      background-color: #4285f4;
+      color: white;
+      transition: background-color 0.3s ease;
+      min-width: 220px;
     }
     button:hover {
       background-color: #3367d6;
@@ -50,9 +53,11 @@
 </head>
 <body>
 
-  <h1>Teste de Conversão - teste (1)</h1>
-  <p>Clique no botão abaixo para disparar a conversão de teste:</p>
-  <button onclick="enviarConversao()">Disparar Conversão</button>
+  <h1>Teste de Conversão Google Ads - Multi Eventos</h1>
+
+  <button onclick="enviarConversao('AW-17002507320/pMxgCPWrwcwaELjYtqs_')">Lift Detox Black</button>
+  <button onclick="enviarConversao('AW-17002507320/8EBYCJbwkvIaELjYtqs_')">Teste (1)</button>
+  <button onclick="enviarConversao('AW-17002507320/7yOuCOLEhdIaELjYtqs_')">Rosa Amazonica</button>
 
 </body>
 </html>
